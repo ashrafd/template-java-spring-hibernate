@@ -1,26 +1,11 @@
 package com.example.controller;
 
-import com.example.controller.ListLiveChatMessages;
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.YouTubeScopes;
-import com.google.api.services.youtube.model.LiveChatMessage;
-import com.google.api.services.youtube.model.LiveChatMessageAuthorDetails;
-import com.google.api.services.youtube.model.LiveChatMessageListResponse;
-import com.google.api.services.youtube.model.LiveChatMessageSnippet;
-import com.google.api.services.youtube.model.LiveChatSuperChatDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.IOException;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/index")

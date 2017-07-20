@@ -23,15 +23,16 @@ import com.google.api.services.youtube.model.LiveBroadcastListResponse;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.common.collect.Lists;
+
 import java.io.IOException;
 import java.util.List;
 
 /**
  * Gets a live chat id from a video id or current signed in user.
- *
+ * <p>
  * The videoId is often included in the video's url, e.g.:
  * https://www.youtube.com/watch?v=L5Xc93_ZL60
- *                                 ^ videoId
+ * ^ videoId
  * The video URL may be found in the browser address bar, or by right-clicking a video and selecting
  * Copy video URL from the context menu.
  *
@@ -47,7 +48,7 @@ public class GetLiveChatId {
 
     /**
      * Poll live chat messages and SuperChat details from a live broadcast.
-     *
+     * <p>
      * from the chat associated with this video. If the videoId is not specified, the signed in
      * user's current live broadcast will be used instead.
      */
@@ -63,12 +64,12 @@ public class GetLiveChatId {
 
             // This object is used to make YouTube Data API requests.
             youtube = new YouTube.Builder(Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, credential)
-                .setApplicationName("youtube-cmdline-getlivechatid-sample").build();
+                    .setApplicationName("youtube-cmdline-getlivechatid-sample").build();
 
             // Get the liveChatId
             String liveChatId = videoId != null
-                ? getLiveChatId(youtube, videoId)
-                : getLiveChatId(youtube);
+                    ? getLiveChatId(youtube, videoId)
+                    : getLiveChatId(youtube);
             if (liveChatId != null) {
                 System.out.println("Live chat id: " + liveChatId);
             } else {
@@ -77,8 +78,8 @@ public class GetLiveChatId {
             }
         } catch (GoogleJsonResponseException e) {
             System.err
-                .println("GoogleJsonResponseException code: " + e.getDetails().getCode() + " : "
-                    + e.getDetails().getMessage());
+                    .println("GoogleJsonResponseException code: " + e.getDetails().getCode() + " : "
+                            + e.getDetails().getMessage());
             e.printStackTrace();
 
         } catch (IOException e) {
@@ -99,11 +100,11 @@ public class GetLiveChatId {
     static String getLiveChatId(YouTube youtube) throws IOException {
         // Get signed in user's liveChatId
         YouTube.LiveBroadcasts.List broadcastList = youtube
-            .liveBroadcasts()
-            .list("snippet")
-            .setFields("items/snippet/liveChatId")
-            .setBroadcastType("all")
-            .setBroadcastStatus("active");
+                .liveBroadcasts()
+                .list("snippet")
+                .setFields("items/snippet/liveChatId")
+                .setBroadcastType("all")
+                .setBroadcastStatus("active");
         LiveBroadcastListResponse broadcastListResponse = broadcastList.execute();
         for (LiveBroadcast b : broadcastListResponse.getItems()) {
             String liveChatId = b.getSnippet().getLiveChatId();
@@ -125,9 +126,9 @@ public class GetLiveChatId {
     static String getLiveChatId(YouTube youtube, String videoId) throws IOException {
         // Get liveChatId from the video
         YouTube.Videos.List videoList = youtube.videos()
-            .list("liveStreamingDetails")
-            .setFields("items/liveStreamingDetails/activeLiveChatId")
-            .setId(videoId);
+                .list("liveStreamingDetails")
+                .setFields("items/liveStreamingDetails/activeLiveChatId")
+                .setId(videoId);
         VideoListResponse response = videoList.execute();
         for (Video v : response.getItems()) {
             String liveChatId = v.getLiveStreamingDetails().getActiveLiveChatId();

@@ -22,7 +22,6 @@ import com.google.api.services.youtube.YouTubeScopes;
 import com.google.api.services.youtube.model.LiveChatMessage;
 import com.google.api.services.youtube.model.LiveChatMessageAuthorDetails;
 import com.google.api.services.youtube.model.LiveChatMessageListResponse;
-import com.google.api.services.youtube.model.LiveChatMessageSnippet;
 import com.google.api.services.youtube.model.LiveChatSuperChatDetails;
 import com.google.common.collect.Lists;
 
